@@ -1,0 +1,117 @@
+:root {
+    --header-height: 64px;
+    --panel-width: 280px;
+    --bg-dark: #1f2933;
+    --bg-light: #f5f7fa;
+    --accent: #38bdf8;
+}
+
+/* RESET MÍNIMO */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg-light);
+    color: #111;
+}
+
+/* HEADER PRINCIPAL */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--bg-dark);
+    color: white;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding: 0 1rem;
+    z-index: 1000;
+}
+
+.main-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* MAIN */
+main {
+    padding-top: calc(var(--header-height) + 1rem);
+    padding-inline: 1rem;
+}
+
+/* PANELES */
+.side-panel {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: var(--panel-width);
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-panel.left {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+.side-panel.right {
+    right: 0;
+    transform: translateX(100%);
+}
+
+.side-panel.open {
+    transform: translateX(0);
+}
+
+/* HEADER DE PANEL */
+.panel-header {
+    position: sticky;
+    top: 0;
+    background: var(--bg-dark);
+    color: white;
+    height: var(--header-height);
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+}
+
+.panel-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* CONTENIDO PANEL */
+.side-panel section {
+    padding: 1rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* FOOTER */
+footer {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: #555;
+}

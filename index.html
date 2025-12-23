@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora Nutricional</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- HEADER PRINCIPAL -->
+  <header class="main-header">
+    <button id="openLeft">☰</button>
+    <h1>Calculadora Nutricional</h1>
+    <button id="openRight">☰</button>
+  </header>
+
+  <!-- PANEL IZQUIERDO -->
+  <aside class="side-panel left" id="leftPanel">
+    <header class="panel-header">
+      <button class="close" data-close="left">◀</button>
+      <h2>Calculadora Nutricional</h2>
+      <button class="action">⚙</button>
+    </header>
+    <section>
+      <p>Panel izquierdo: opciones, filtros, perfiles nutricionales.</p>
+    </section>
+  </aside>
+
+  <!-- PANEL DERECHO -->
+  <aside class="side-panel right" id="rightPanel">
+    <header class="panel-header">
+      <button class="action">⚙</button>
+      <h2>Calculadora Nutricional</h2>
+      <button class="close" data-close="right">▶</button>
+    </header>
+    <section>
+      <p>Panel derecho: resultados, métricas, recomendaciones.</p>
+    </section>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <section>
+      <h2>Introducción</h2>
+      <p>
+        Esta sección existe para forzar scroll y demostrar que los headers
+        permanecen fijos independientemente del desplazamiento vertical.
+      </p>
+    </section>
+
+    <section>
+      <h2>Contenido</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Repetí este texto mentalmente hasta que aparezca el scroll.</p>
+      <p style="height: 120vh;"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 – Ejemplo educativo</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
