@@ -1,67 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculadora Nutricional</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Gráfico Doughnut Completo - Dark/Light/Móvil</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fff; /* Light */
+      color: #111827;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    canvas {
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #000; /* Dark */
+        color: #e5e7eb;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <canvas id="miDoughnut"></canvas>
+  <script>
+    const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const textColor = isDark ? '#e5e7eb' : '#111827';
+    const tooltipBg = isDark ? '#1f2937' : '#f3f4f6';
+    const tooltipTitle = isDark ? '#facc15' : '#1f2937';
+    const tooltipBody = isDark ? '#ffffff' : '#111827';
+    const borderColor = isDark ? '#000' : '#fff';
 
-  <!-- HEADER PRINCIPAL -->
-  <header class="main-header">
-    <button id="openLeft">☰</button>
-    <h1>Calculadora Nutricional</h1>
-    <button id="openRight">☰</button>
-  </header>
-
-  <!-- PANEL IZQUIERDO -->
-  <aside class="side-panel left" id="leftPanel">
-    <header class="panel-header">
-      <button class="close" data-close="left">◀</button>
-      <h2>Panel 1</h2>
-      <button class="action">⚙</button>
-    </header>
-    <section>
-      <p>Panel izquierdo: opciones, filtros, perfiles nutricionales.</p>
-    </section>
-  </aside>
-
-  <!-- PANEL DERECHO -->
-  <aside class="side-panel right" id="rightPanel">
-    <header class="panel-header">
-      <button class="action">⚙</button>
-      <h2>Panel 2</h2>
-      <button class="close" data-close="right">▶</button>
-    </header>
-    <section>
-      <p>Panel derecho: resultados, métricas, recomendaciones.</p>
-    </section>
-  </aside>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <main>
-    <section>
-      <h2>Introducción</h2>
-      <p>
-        Esta sección existe para forzar scroll y demostrar que los headers
-        permanecen fijos independientemente del desplazamiento vertical.
-      </p>
-    </section>
-
-    <section>
-      <h2>Contenido</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <p>Repetí este texto mentalmente hasta que aparezca el scroll.</p>
-      <p style="height: 120vh;"></p>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 – Ejemplo educativo</p>
-  </footer>
-
-  <script src="script.js"></script>
+    const ctx = document.getElementById('miDoughnut').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Rojo', 'Azul', 'Amarillo', 'Verde', 'Morado'],
+        datasets: [{
+          label: 'Colores',
+          data: [30, 50, 20, 40, 25],
+          backgroundColor: ['#ef4444', '#3b82f6', '#facc15', '#10b981', '#8b5cf6'],
+          borderColor: borderColor,
+          borderWidth: 3,
+          hoverOffset: 15,
+          spacing: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '50%',
+        rotation: -90,
+        circumference: 360,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              color: textColor,
+              font: { size: 14, family: 'Arial', weight: 'bold' },
+              padding: 20,
+              boxWidth: 20,
+              boxHeight: 20
+            }
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'nearest',
+            intersect: true,
+            backgroundColor: tooltipBg,
+            titleColor: tooltipTitle,
+            bodyColor: tooltipBody,
+            borderColor: '#3b82f6',
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              title: ctx => 'Color: ' + ctx[0].label,
+              label: ctx => 'Valor: ' + ctx.parsed + ' unidades'
+            }
+          },
+          title: {
+            display: true,
+            text: 'Gráfico Doughnut Completo',
+            color: textColor,
+            font: { size: 20, weight: 'bold' },
+            padding: { top: 10, bottom: 30 }
+          },
+          subtitle: {
+            display: true,
+            text: 'Soporte Dark/Light y Responsive',
+            color: textColor,
+            font: { size: 14 }
+          }
+        },
+        layout: { padding: 10 },
+        animation: {
+          animateRotate: true,
+          animateScale: true,
+          duration: 1500,
+          easing: 'easeOutBounce'
+        },
+        hover: { mode: 'nearest', animationDuration: 400 }
+      }
+    });
+  </script>
 </body>
 </html>
